@@ -2,230 +2,131 @@
 
 ## 1. Project Overview
 
-TechBridge is a Tech Donation Platform that connects businesses with schools to redistribute functional electronic 
+TechBridge is a Tech Donation Platform that connects businesses with schools to redistribute functional electronic
 devices that are no longer required for corporate use but are still suitable for students’ learning needs.
 
-Disadvantaged high school students (and below) can apply for devices through NGOs, social workers, or school 
+Disadvantaged high school students (and below) can apply for devices through NGOs, social workers, or school
 representatives.
 
-The system is designed not only for program coordinators, but also for partnered businesses and schools to submit 
+The system is designed not only for program coordinators, but also for partnered businesses and schools to submit
 requests, manage donations, and track allocation progress through a structured workflow.
 
-### Tech stack
+---
+
+## 2. Tech Stack
 
 - Spring Boot
 - Angular
+- MySQL (Docker)
+- JWT Authentication
+- Maven
 
-# 2. Requirements Mapping & MVP Plan
+---
 
-## 2.1 Roles
+# 3. Requirements & MVP Plan
 
-| Role | Description |
-|------|------------|
-| ADMIN | Program coordinator managing approvals and allocations |
-| REQUESTING_ORG | NGOs, social workers, or school representatives submitting device requests |
-| BUSINESS | Business donating devices |
-| REFURB_PARTNER (Future) | Partner updating refurbishment status |
+## 3.1 Roles
 
+| Role | Purpose |
+|------|----------|
+| ADMIN | Approves organisations, donations, and allocations |
+| REQUESTING_ORG | Submits device requests |
+| BUSINESS | Submits device donations |
+| REFURB_PARTNER (Future) | Updates refurbishment status |
 
-## 2.2 User Account Features
+---
 
-### Required for MVP
+## 3.2 User Accounts (MVP)
 
-- Unique email registration
-- Email verification
-- Login with JWT authentication
-- Refresh token support
-- Password reset (token expires in 24 hours)
-- Update profile details:
-    - Name
-    - Email
-    - Phone
-    - Organisation Name
-    - Address
+### Core Features
+- Email registration + verification
+- JWT authentication + refresh token
+- Password reset (24h expiry)
+- Update profile details
 
-### Optional (Future Enhancements)
-
+### Future Enhancements
 - Profile image
 - Two-factor authentication
-- Brute-force login protection
+- Brute-force protection
 
-## 2.3 Role-Based Access Control (ACL)
+---
 
-Application resources must be protected based on roles:
+## 3.3 Role-Based Access Control
 
-- ADMIN
-    - Approve / reject requesting orgs
-    - Approve / reject donations
-    - Allocate devices
-    - View dashboard statistics
+### ADMIN
+- Approve / reject organisations
+- Approve / reject requests and donations
+- Allocate devices
+- View dashboard metrics
 
-- REQUESTING_ORG
-    - Submit device requests
-    - View request status
-    - Update request details
-
-- BUSINESS
-    - Submit donation offers
-    - Update donation details
-    - View allocation status
-
-# 3. Organisations
-
-## 3.1 Organisation Entity
-
-### Fields:
-
-- id
-- name
-- type (REQUESTING_ORG | BUSINESS)
-- address
-- contactEmail
-- contactPhone
-- status (PENDING | APPROVED | REJECTED | ACTIVE | SUSPENDED)
-- createdAt
-- updatedAt
-
-## 3.2 Organisation Features
-
-- Search by name
-- Pagination support
-- Filter by type
-- Filter by status
-- Export to spreadsheet (Future enhancement)
-
-
-# 4. Device Requests
-
-## 4.1 Device Request (REQUESTING_ORG)
-
-### Fields:
-
-- id
-- requestingOrgId
-- deviceType
-- quantity
-- minimumSpecs
-- priorityLevel
-- status (PENDING | APPROVED | REJECTED | PARTIALLY_FULFILLED | FULFILLED)
-- createdAt
-- updatedAt
-
-### Features:
-
-- Create request
-- Update request
+### REQUESTING_ORG
+- Create & update device requests
 - View request status
-- Admin approval workflow
-- Allocation tracking
 
-# 5. Donation Offers
+### BUSINESS
+- Submit & update donation offers
+- View allocation status
 
-## 5.1 Donation Entity
+---
 
-### Fields:
+# 4. Core Domain Modules (MVP Scope)
 
-- id
-- businessId
-- deviceType
-- quantity
-- condition
-- pickupLocation
-- status (PENDING | APPROVED | ALLOCATED)
-- createdAt
-- updatedAt
+## 4.1 Admin
+- Overview Metrics
+  - Pending requests
+  - Approved organisations
+  - Available devices
+  - Allocations this month
+- Search & filter by type/status
+- Pagination support
 
-### Features:
+### 4.1.1 Allocation Workflow: 
+Admin matches donations → requests.
 
-- Submit donation
-- Update donation quantity
-- Admin approval
-- Allocation to requesting orgs
-- Mark as completed
-
-
-# 6. Allocation Workflow
-
-Admin can:
-
-- View pending requests
-- View available donations
-- Allocate devices from donation → to request
-- Update statuses accordingly
-
-### Allocation Rules (Basic Version)
-
+Basic rules:
 - Allocation reduces donation quantity
-- Allocation increases fulfilled count of request
-- If request quantity met → mark FULFILLED
-- If donation quantity exhausted → mark ALLOCATED
+- Allocation increases fulfilled amount
+- Auto-update status when complete
 
-# 7. Audit Logging
+## 4.2 Device Requests by Requesting Orgs
+- Create & update request
+- Status tracking (Pending for Admin approval → Fulfilled)
 
-E.g. log meaningful domain actions:
+## 4.3 Donation Offers by Business
+- Submit donation
+- Admin approval
+- Status tracking (Pending for Admin approval → Fulfilled)
+- Track remaining quantity
 
-### Logged Events
+---
 
-- Requesting orgs submit request
-- Requesting orgs update request
-- Business submits donation
-- Business updates donation
-- Admin approves/rejects organisation
-- Admin approves/rejects request
-- Admin allocates devices
+# 5.  Development Order
 
-### Audit Log Fields
+1. Authentication (JWT)
+2. Role authorization
+3. Organisation module
+4. Request module
+5. Donation module
+6. Allocation logic
+7. Basic dashboard
+8. Audit logging
 
-- id
-- userId
-- actionType
-- entityType
-- entityId
-- timestamp
-- details
+---
 
+# 6. Audit Logging (TBD)
 
-# 8. Admin Dashboard
+Log meaningful actions:
+- Request created / updated
+- Donation created / updated
+- Organisation approved / rejected
+- Allocation performed
 
-## Overview Widgets
+---
 
-- Total pending requests
-- Total approved requesting orgs
-- Total available devices
-- Devices allocated this month
-- Organisations awaiting approval
+# 7. Future Enhancements
 
-## Tables on screens
-
-### Requesting Orgs
-
-| Requesting Orgs | Status | Devices Requested | Fulfilled | Remaining |
-
-### Businesses
-
-| Business | Status | Devices Donated | Allocated | Remaining |
-
-
-# 9. MVP Development Order
-
-Build in this order:
-
-1. User Registration + JWT Authentication
-2. Role-Based Authorization
-3. Organisation Entity
-4. Device Request Entity
-5. Donation Entity
-6. Admin Approval Workflow
-7. Allocation Logic
-8. Basic Admin Dashboard
-
-
-# 10. Features to Skip for MVP
-
-Later:
-
+- Export table content to Excel
 - Two-factor authentication
-- Complex brute-force protection
-- PDF generation
 - Email notifications
-- Refurbishment Partners and the Device refurbishment workflow
+- PDF generation
+- Refurbishment partner workflow  
