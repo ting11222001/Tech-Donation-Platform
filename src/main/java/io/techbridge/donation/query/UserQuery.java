@@ -1,0 +1,11 @@
+package io.techbridge.donation.query;
+
+/**
+ * @author Li-Ting Liao
+ * @version 1.0
+ * @since 02/2026
+ */
+public class UserQuery {
+    public static final String COUNT_USER_EMAIL_QUERY = "";
+    public static final String INSERT_USER_QUERY = "";
+}
