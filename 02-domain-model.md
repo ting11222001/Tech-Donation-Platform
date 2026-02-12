@@ -2,54 +2,44 @@
 
 This document defines the core entities for the MVP.
 
-# 1. User
-
+# User
 Represents a system account.
-
-## Fields
 
 - id (PK)
 - first_name
 - last_name
 - email (unique)
 - password
-- role (ADMIN | BUSINESS | REQUESTING_ORG)
-- account_status (ACTIVE | PENDING | SUSPENDED)
+- enabled (to show if the user is active)
+- non_locked (to show if the user is suspended)
 - created_at
-- updated_at
+
+# Role
+- id (PK)
+- name (unique) (to show e.g. admin, business, requesting orgs)
+- permission (e.g. read, update, etc.)
 
 
-# 2. Requesting Org (Schools / NGOs)
-
-## Fields
-
+# Requesting Org (Schools / NGOs)
 - id (PK)
 - user_id (FK -> User)
 - name
 - address
 - contact_number
 - description
-- approval_status (PENDING | APPROVED | REJECTED | SUSPENDED?)
 
 
-# 3. Business (Donor)
-
-## Fields
-
+# Business (Donor)
 - id (PK)
 - user_id (FK -> User)
 - business_name
 - abn
 - address
 - contact_number
-- approval_status (PENDING | APPROVED | REJECTED)
 
 
-# 4. Donation Request
-
+# Donation Request
 Submitted by a REQUESTING_ORG.
-
-## Fields
 
 - id (PK)
 - organisation_id (FK → Organisation)
@@ -63,11 +53,8 @@ Submitted by a REQUESTING_ORG.
 - updated_at
 
 
-# 5. Device (Donation Listing)
-
+# Device (Donation Listing)
 Submitted by a BUSINESS.
-
-## Fields
 
 - id (PK)
 - business_id (FK → Business)
@@ -84,11 +71,8 @@ Submitted by a BUSINESS.
 - updated_at
 
 
-# 5. Allocation (Core Business Logic)
-
+# Allocation (Core Business Logic)
 Represents a match between a Donated Device and a Organisation Request.
-
-## Fields
 
 - id (PK)
 - device_id (FK -> Device)
@@ -98,22 +82,18 @@ Represents a match between a Donated Device and a Organisation Request.
 - allocated_at
 
 
-# 6. AuditLog (Later)
-
+# AuditLog
 Tracks important domain actions.
 
-## Fields
+User performed Event on Entity:
+- User -> who
+- Event -> what action
+- Entity -> which record
 
-- id (PK)
-- user_id
-- action_type (DEVICE_APPROVED, REQUEST_REJECTED, ALLOCATION_CREATED)
-- entity_type
-- entity_id
-- timestamp
+Included in the UserEvents table.
 
 
-# 7. Key Relationships
-
+# Key Relationships
 - One Organisation -> Many Users
 - One Organisation -> Many DeviceRequests
 - One Organisation -> Many Donations

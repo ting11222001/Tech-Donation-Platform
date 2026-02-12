@@ -25,12 +25,11 @@ requests, manage donations, and track allocation progress through a structured w
 
 1. Authentication (JWT)
 2. Role authorization
-3. Organisation module
+3. Basic dashboard
 4. Request module
 5. Donation module
 6. Allocation logic
-7. Basic dashboard
-8. Audit logging
+7. Audit logging
 
 ## 3.2 Roles
 
@@ -100,11 +99,8 @@ Basic rules:
 - Track remaining quantity
 
 # 5. Audit Logging (TBD)
-
-Log meaningful actions:
-- Request created / updated
-- Donation created / updated
-- Organisation approved / rejected
+- Request created / updated / approved / rejected
+- Donation created / updated / approved / rejected
 - Allocation performed
 
 # 6. Future Enhancements
