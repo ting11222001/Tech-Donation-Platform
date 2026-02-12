@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 
 import static io.techbridge.donation.enumeration.RoleType.*;
+import static io.techbridge.donation.query.RoleQuery.INSERT_ROLE_TO_USER_QUERY;
+import static io.techbridge.donation.query.RoleQuery.SELECT_ROLE_BY_NAME_QUERY;
 
 /**
  * @author Li-Ting Liao
@@ -24,8 +26,6 @@ import static io.techbridge.donation.enumeration.RoleType.*;
 @RequiredArgsConstructor
 @Slf4j
 public class RoleRepositoryImpl implements RoleRepository<Role> {
-    private static final String SELECT_ROLE_BY_NAME_QUERY = "";
-    private static final String INSERT_ROLE_TO_USER_QUERY = "";
     private final NamedParameterJdbcTemplate jdbc;
 
     @Override
