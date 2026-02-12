@@ -11,8 +11,6 @@ representatives.
 The system is designed not only for program coordinators, but also for partnered businesses and schools to submit
 requests, manage donations, and track allocation progress through a structured workflow.
 
----
-
 ## 2. Tech Stack
 
 - Spring Boot
@@ -20,8 +18,6 @@ requests, manage donations, and track allocation progress through a structured w
 - MySQL (Docker)
 - JWT Authentication
 - Maven
-
----
 
 # 3. Requirements & MVP Plan
 
@@ -45,7 +41,6 @@ requests, manage donations, and track allocation progress through a structured w
 | BUSINESS | Submits devices for donation                                       |
 | REFURB_PARTNER (Future) | Updates refurb status                                       |
 
----
 
 ## 3.3 Role-Based Access Control
 
@@ -63,7 +58,6 @@ requests, manage donations, and track allocation progress through a structured w
 - Submit & update donation offers
 - View allocation status
 
----
 
 # 4. Core Domain Modules
 - Authentication
@@ -105,8 +99,6 @@ Basic rules:
 - Status tracking (Pending for Admin approval -> Fulfilled)
 - Track remaining quantity
 
----
-
 # 5. Audit Logging (TBD)
 
 Log meaningful actions:
@@ -114,8 +106,6 @@ Log meaningful actions:
 - Donation created / updated
 - Organisation approved / rejected
 - Allocation performed
-
----
 
 # 6. Future Enhancements
 

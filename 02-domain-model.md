@@ -2,8 +2,6 @@
 
 This document defines the core entities for the MVP.
 
----
-
 # 1. User
 
 Represents a system account.
@@ -20,7 +18,6 @@ Represents a system account.
 - created_at
 - updated_at
 
----
 
 # 2. Requesting Org (Schools / NGOs)
 
@@ -34,7 +31,6 @@ Represents a system account.
 - description
 - approval_status (PENDING | APPROVED | REJECTED | SUSPENDED?)
 
----
 
 # 3. Business (Donor)
 
@@ -48,7 +44,6 @@ Represents a system account.
 - contact_number
 - approval_status (PENDING | APPROVED | REJECTED)
 
----
 
 # 4. Donation Request
 
@@ -67,7 +62,6 @@ Submitted by a REQUESTING_ORG.
 - created_at
 - updated_at
 
----
 
 # 5. Device (Donation Listing)
 
@@ -89,7 +83,6 @@ Submitted by a BUSINESS.
 - created_at
 - updated_at
 
----
 
 # 5. Allocation (Core Business Logic)
 
@@ -104,7 +97,6 @@ Represents a match between a Donated Device and a Organisation Request.
 - allocated_by (FK -> ADMIN)
 - allocated_at
 
----
 
 # 6. AuditLog (Later)
 
@@ -119,7 +111,6 @@ Tracks important domain actions.
 - entity_id
 - timestamp
 
----
 
 # 7. Key Relationships
 

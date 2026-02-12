@@ -21,7 +21,6 @@ Tables:
 
 | Org | Device Type | Qty | Status | Allocate |
 
----
 
 # BUSINESS DASHBOARD
 
@@ -37,7 +36,6 @@ Table:
 Button:
 - Submit Device
 
----
 
 # REQUESTING ORGANISATION DASHBOARD
 
