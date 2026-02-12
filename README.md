@@ -25,29 +25,25 @@ requests, manage donations, and track allocation progress through a structured w
 
 # 3. Requirements & MVP Plan
 
-## 3.1 Roles
+## 3.1 Development Order
 
-| Role | Purpose |
-|------|----------|
-| ADMIN | Approves organisations, donations, and allocations |
-| REQUESTING_ORG | Submits device requests |
-| BUSINESS | Submits device donations |
-| REFURB_PARTNER (Future) | Updates refurbishment status |
+1. Authentication (JWT)
+2. Role authorization
+3. Organisation module
+4. Request module
+5. Donation module
+6. Allocation logic
+7. Basic dashboard
+8. Audit logging
 
----
+## 3.2 Roles
 
-## 3.2 User Accounts (MVP)
-
-### Core Features
-- Email registration + verification
-- JWT authentication + refresh token
-- Password reset (24h expiry)
-- Update profile details
-
-### Future Enhancements
-- Profile image
-- Two-factor authentication
-- Brute-force protection
+| Role | Purpose                                                            |
+|------|--------------------------------------------------------------------|
+| ADMIN | Approves organisations, monitor donation status, allocates devices |
+| REQUESTING_ORG | Submits donation requests                                          |
+| BUSINESS | Submits devices for donation                                       |
+| REFURB_PARTNER (Future) | Updates refurb status                                       |
 
 ---
 
@@ -69,9 +65,20 @@ requests, manage donations, and track allocation progress through a structured w
 
 ---
 
-# 4. Core Domain Modules (MVP Scope)
+# 4. Core Domain Modules
+- Authentication
+- Role-based access
+- Device submission
+- Donation request submission
+- Manual admin allocation
 
-## 4.1 Admin
+## 4.1 User accounts feature
+- Email registration + verification
+- JWT authentication + refresh token
+- Password reset (24h expiry)
+- Update profile details
+
+## 4.2 Admin
 - Overview Metrics
   - Pending requests
   - Approved organisations
@@ -80,7 +87,7 @@ requests, manage donations, and track allocation progress through a structured w
 - Search & filter by type/status
 - Pagination support
 
-### 4.1.1 Allocation Workflow: 
+### 4.2.1 Allocation Workflow: 
 Admin matches donations → requests.
 
 Basic rules:
@@ -88,32 +95,19 @@ Basic rules:
 - Allocation increases fulfilled amount
 - Auto-update status when complete
 
-## 4.2 Device Requests by Requesting Orgs
+## 4.3 Device Requests by Requesting Orgs
 - Create & update request
-- Status tracking (Pending for Admin approval → Fulfilled)
+- Status tracking (Pending for Admin approval -> Fulfilled)
 
-## 4.3 Donation Offers by Business
+## 4.4 Donation Offers by Business
 - Submit donation
 - Admin approval
-- Status tracking (Pending for Admin approval → Fulfilled)
+- Status tracking (Pending for Admin approval -> Fulfilled)
 - Track remaining quantity
 
 ---
 
-# 5.  Development Order
-
-1. Authentication (JWT)
-2. Role authorization
-3. Organisation module
-4. Request module
-5. Donation module
-6. Allocation logic
-7. Basic dashboard
-8. Audit logging
-
----
-
-# 6. Audit Logging (TBD)
+# 5. Audit Logging (TBD)
 
 Log meaningful actions:
 - Request created / updated
@@ -123,10 +117,17 @@ Log meaningful actions:
 
 ---
 
-# 7. Future Enhancements
+# 6. Future Enhancements
 
+Dashboard:
 - Export table content to Excel
-- Two-factor authentication
 - Email notifications
 - PDF generation
-- Refurbishment partner workflow  
+- Refurbishment partner workflow
+
+User accounts:
+- Two-factor authentication
+- Brute-force protection
+- Profile image
+
+
